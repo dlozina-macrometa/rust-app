@@ -23,7 +23,8 @@ async fn manual_hello() -> impl Responder {
 async fn main() -> std::io::Result<()> {
     // Initialize the logger
     env_logger::Builder::from_env(Env::default().default_filter_or("info")).init();
-    info!("Starting server at http://127.0.0.1:8080");
+    // For local testing change to http://127.0.0.1:8080
+    info!("Starting server at http://0.0.0.0:8080");
 
     HttpServer::new(|| {
         App::new()
@@ -31,7 +32,8 @@ async fn main() -> std::io::Result<()> {
             .service(echo)
             .route("/hey", web::get().to(manual_hello))
     })
-        .bind(("127.0.0.1", 8080))?
+        // For local testing change to http://127.0.0.1:8080 -> Docker works with "0.0.0.0"
+        .bind(("0.0.0.0", 8080))?
         .run()
         .await
 }

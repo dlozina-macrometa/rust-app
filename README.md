@@ -10,5 +10,5 @@ docker build -t rust-app .
 # How to run the docker image
 
 ```bash
-docker run -p 8080:8080 rust-app
+docker run -p 8000:8080 rust-app
 ```

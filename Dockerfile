@@ -23,5 +23,8 @@ COPY . .
 # Build the application
 RUN cargo build --release
 
+# Expose the port that the application listens on
+EXPOSE 8080
+
 # Set the startup command to run your compiled binary
 CMD ["./target/release/rust-app"]
